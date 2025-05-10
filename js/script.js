@@ -1,7 +1,28 @@
 import { Chess, BLACK } from 'chess.js'
-// import { AtpAgent } from '@atproto/api'
+import { AtpAgent } from '@atproto/api'
 
-// const agent = new AtpAgent({ service: 'https://bsky.social' })
+const agent = new AtpAgent({ service: 'https://bsky.social' })
+
+await agent.login({
+    identifier: 'totallynotseth.dev',
+    password: 'yfml-cudr-2ohc-e2by',
+})
+
+const record = await agent.com.atproto.repo.createRecord({
+    repo: agent.did,
+    collection: 'games.atproto.dev.chess.game',
+    record: {
+        $type: 'games.atproto.dev.chess.game',
+        opponentGameRecord: null,
+        moves: [
+            "e4",
+            "e5",
+            "Nf3",
+            "Nc6",
+        ],
+        updatedAt: new Date().toISOString(),
+    }
+})
 
 let board = null;
 const game = new Chess();
